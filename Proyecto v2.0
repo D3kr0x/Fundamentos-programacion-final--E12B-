@@ -1,0 +1,153 @@
+package Tareafundamentos;
+import java.util.*;
+public class ProyectoPollon {
+    public static void main(String[] args) {
+        Scanner entrada = new Scanner(System.in);
+        int op=0,carrito=0, cant=0;
+        String des="";
+        //Desclarando los arreglos
+        String [] Pollos ={"nada","1/8 Pollo","1/4 Pollo","1/2 Pollo", "1 Pollo" };
+        double [] Prepollo ={00.00,15.00,25.00,35.00,45.00};
+        String [] Bebidas ={"nada","Coca cola 2L","Pepsi 2L","Inka cola 2L"};
+        double [] Prebebidas={00.00,10.00,8.00,11.00};
+        String [] Adicional ={"nada","Arroz","Porcion Papas","Porcion anticucho","Sin adicional"};
+        double [] PreAdicional={00.00,7,12,16,00.00};
+
+
+
+        //Declarando Arreglo Boleta
+        String [] Prod_b = new String[999];
+        double [] Preprod_b = new  double[999];
+        int [] cant_b = new int[999];
+        //Mostrar Menu POLLO//
+
+        while (!des.equalsIgnoreCase("n")) {
+            System.out.println("Seleccione El Menu :");
+            System.out.printf("%-6s %6s %9s \n","Op","Producto"," Precio");
+            for (int i = 1; i < Pollos.length; i++) {
+                //System.out.println("[" + i + "]    " + Pollos[i] +"   "+ Prepollo[i]);
+                System.out.printf("[%d] %12s %7.2f \n",i, Pollos[i] , Prepollo[i]);
+            }
+            System.out.println("Introduce un numero : ");
+            op = entrada.nextInt();
+            System.out.println("Cantidad: ");
+            cant = entrada.nextInt();
+            Prod_b[carrito] = Pollos[op];
+            Preprod_b[carrito] = Prepollo[op]*cant;
+            cant_b[carrito]=cant;
+
+            for (int i=0;i<=carrito;i++){
+               // System.out.println(Prod_b[i] + " Precio: " + Preprod_b[i]);
+                System.out.printf("%-11s Cant:%d %6.2f \n",Prod_b[i],cant_b[i],Preprod_b[i]);
+
+            }
+
+            System.out.println("Desea agregar algo mas: S/N?");
+            des = entrada.next();
+            carrito=carrito+1;
+
+        }
+        System.out.println(carrito);
+        des="";
+        //Menu bebidas
+        while (!des.equalsIgnoreCase("n")) {
+            System.out.println("Seleccione La bebida:");
+            System.out.printf("%-6s %6s %12s \n","Op","Producto"," Precio");
+            for (int i = 1; i < Bebidas.length; i++) {
+                //System.out.println("[" + i + "]" + Bebidas[i]);
+                System.out.printf("[%d] %15s %7.2f \n",i, Bebidas[i] , Prebebidas[i]);
+
+            }
+            System.out.println("Introduce un número por pantalla: ");
+            op = entrada.nextInt();
+            System.out.println("Cantidad: ");
+            cant = entrada.nextInt();
+            Prod_b[carrito] = Bebidas[op];
+            Preprod_b[carrito] = Prebebidas[op]*cant;
+            cant_b[carrito]=cant;
+
+            for (int i=0;i<=carrito;i++){
+                //System.out.println(Prod_b[i] + " Precio: " + Preprod_b[i]);
+                System.out.printf("%-15s Cant:%d %6.2f \n",Prod_b[i],cant_b[i],Preprod_b[i]);
+            }
+
+            System.out.println("Desea agregar algo mas: S/N?");
+            des = entrada.next();
+            carrito=carrito+1;
+
+        }
+        System.out.println(carrito);
+        des="";
+        //Mostrar Menu Adicional//
+        System.out.println("Desea agregar adicional?: S/N");
+        des = entrada.next();
+        if (des.equalsIgnoreCase("S")){
+
+            while (!des.equalsIgnoreCase("n")) {
+                System.out.println("Seleccione El Menu :");
+                System.out.printf("%s %10s %17s \n","Op","Producto"," Precio");
+                for (int i = 1; i < Adicional.length; i++) {
+                    //System.out.println("[" + i + "]" + Adicional[i]);
+                    System.out.printf("[%d]  %-18s %7.2f \n",i, Adicional[i] , PreAdicional[i]);
+                }
+                System.out.println("Introduce un número por pantalla: ");
+                op = entrada.nextInt();
+                Prod_b[carrito] = Adicional[op];
+                Preprod_b[carrito] = PreAdicional[op];
+
+                for (int i=0;i<=carrito;i++){
+                   // System.out.println(Prod_b[i] + " Precio: " + Preprod_b[i]);
+                    System.out.printf("%-11s Cant:%d %6.2f \n",Prod_b[i],cant_b[i],Preprod_b[i]);
+                }
+
+                System.out.println("Desea agregar algo mas: S/N?");
+                des = entrada.next();
+                carrito=carrito+1;
+
+            }
+
+            des="";
+
+        }
+        carrito=carrito-1;
+        //Imprimimos BOLETA
+        System.out.println("""
+                ************************************
+                        POLLERIA EL POLLON
+                ************************************
+                ========= BOLETA DE VENTA ==========
+                ____________________________________
+                """+" Cliente: "+ cli_n + "\n" +" Documento: "+DNI_CLI  );
+        System.out.print("""
+                ====================================
+                """+" Fecha:99/99/99"+ "         Hora: 99:99\n"+
+                """
+                ====================================
+                """);
+        System.out.printf("%s %10s %18s \n","Cant","Producto"," Precio");
+        for (int i=0;i<=carrito;i++){
+            // System.out.println(Prod_b[i] + " Precio: " + Preprod_b[i]);
+
+            System.out.printf(" %-5d %-20s %6.2f \n",cant_b[i],Prod_b[i],Preprod_b[i]);
+            sub=sub+Preprod_b[i];
+
+        }
+        Total=sub*1.18;
+        System.out.print("""
+                **************************************
+                """);
+        System.out.printf("%27s %6.2f\n","Sub total: ", sub );
+        System.out.printf("%27s %6.2f\n","IGV 18%: ", sub*0.18 );
+        System.out.printf("%27s %6.2f\n","Total: ", Total );
+        System.out.print("""
+                **************************************
+                        Gracias por su visita
+                **************************************
+              
+                """);
+
+
+    }
+
+    }
+
